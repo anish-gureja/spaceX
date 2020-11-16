@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-xs-12 col-md-2 col-sm-6 col-auto">
+        <h6>Filters</h6>
+        <div class="text-center"> Launch Year
+            <hr class="mt-2" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-12 col-lg-6" *ngFor="let year of years">
+                    <button (click)="selectedYear=year;launchFilter();" [class.year-active]="isActive(year)" class="btn mt-2" type="button"
+                        mat-raised-button>{{year}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3"> Successful Launch
+            <hr class="mt-2" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-12 col-lg-6">
+                    <button (click)="launchSuccess=true;launchFilter();" [class.launch-active]="isActive('launch_success=true')" class="btn" type="button"
+                        mat-raised-button>True</button>
+                </div>
+                <div class="col-6 col-md-12 col-lg-6">
+                    <button (click)="launchSuccess=false;launchFilter();" [class.launch-active]="isActive('launch_success=false')" class="btn" type="button"
+                        mat-raised-button>False</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3"> Successful Landing
+            <hr class="mt-2" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-12 col-lg-6">
+            <button (click)="landSuccess=true;launchFilter();" [class.land-active]="isActive('land_success=true')" class="btn" type="button" mat-raised-button>True</button>
+         </div>
+         <div class="col-6 col-md-12 col-lg-6">
+            <button (click)="landSuccess=false;launchFilter();" [class.land-active]="isActive('land_success=false')" routerLinkActive="active" class="btn" type="button"
+                mat-raised-button>False</button>
+        </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-10 col-sm-6 mt-2">
+        <div class="text-center mt-5" *ngIf="spaceDetails.length<=0 && foundDetails==true">
+            <h5>{{message}}</h5>
+        </div>
+        <div *ngIf="spaceDetails.length>0" class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12 space-container" *ngFor="let space of spaceDetails">
+                    <img src={{space.links.mission_patch_small}} alt={{space.details}} class="img-thumbnail space-image">
+                    <div class="blue">{{space.mission_name}} # {{space.flight_number}}</div>
+                    <div>
+                        <b>Mission Ids:</b> 
+                        <ul>
+                            <li *ngFor="let mission_id of space.mission_id">
+                                 {{mission_id}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <b>Launch Year:-</b> {{space.launch_year}}
+                    </div>
+                    <div>
+                        <b>Successful Launch:-</b> {{space.launch_success}}
+                    </div>
+                    <div>
+                        <b>Successful Landing:-</b> {{space.land_success}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
